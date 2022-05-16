@@ -1,0 +1,21 @@
+
+version: '3'
+
+services:
+
+    backend:
+        build: ./backend
+        image: backend-img
+        ports:
+            - "8000:8000"
+        command: npm run start
+
+    frontend:
+        build: ./frontend
+        image: frontend-img
+        ports:
+            - "80:4000"
+        stdin_open: true
+        links:
+            - backend
+        command: serve -p 4000 -s .
